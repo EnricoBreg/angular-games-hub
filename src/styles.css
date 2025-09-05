@@ -6,3 +6,9 @@
 @source "../node_modules/flowbite";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply bg-gray-100 dark:bg-gray-900;
+  }
+}
