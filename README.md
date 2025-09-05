@@ -57,3 +57,11 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Linee guida pratiche di struttura del progetto
+
+- `core/`: cose che esistono una sola volta in tutta l’app (AuthService, HttpInterceptor, guard, ThemeService).
+- `shared/`: componenti riutilizzabili in più posti (buttons custom, modali generiche, pipes).
+- `models/`: interfacce/types (Game, User, ecc.), separati così non diventano spaghetti tra i componenti.
+- `pages/` (o features/): ogni sezione dell’app → directory con i componenti e i servizi specifici di quella feature.
+- `services/` globali: mettili dentro core/services. Se invece un servizio serve solo a una feature, lo metti direttamente dentro pages/nome-feature/services.
