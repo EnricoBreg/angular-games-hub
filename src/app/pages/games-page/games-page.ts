@@ -1,13 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, Signal } from '@angular/core';
 import { GamesService, Post } from './games-service';
 import { Game } from '../../models/game';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, startWith, tap } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
+import { GameCard } from '../../shared/components/games/game-card/game-card';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-games-page',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, GameCard],
   templateUrl: './games-page.html',
   styleUrl: './games-page.css',
 })
@@ -16,9 +18,11 @@ export class GamesPage implements OnInit {
   games$!: Observable<Game[]>;
 
   ngOnInit(): void {
-    this.games$ = this.gamesService.getAllGames().pipe(
-      map(response => {console.log(response.results); return response.results})
-    );
+    this.games$ = this.gamesService
+      .getAllGames()
+      .pipe(
+        map((response) => response.results),
+      );
   }
 }
 
