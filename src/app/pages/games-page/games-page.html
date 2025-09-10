@@ -15,4 +15,10 @@
       }
     }
   </div>
+
+  @if (games$ | async) {
+    <div class="w-48 mx-auto vpy-5">
+      <app-pagination [totalPages]="(games$ | async)!.count / pageSize()" />
+    </div>
+  }
 </div>
