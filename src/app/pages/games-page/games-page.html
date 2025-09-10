@@ -5,12 +5,14 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
     @if (games$ | async) {
-      @for (game of games$ | async; track game.id) {
+      @for (game of (games$ | async)!.results; track game.id) {
         <app-game-card [game]="game"></app-game-card>
       }
     }
     @else {
-      <p class="text-gray-200 dark:text-gray-400">Caricamento...</p>
+      @for (skeleton of numSkeleton; track skeleton) {
+        <app-card-skeleton></app-card-skeleton>
+      }
     }
   </div>
 </div>
